@@ -1,0 +1,68 @@
+﻿@using AbcShop.WebApp.Helpers
+
+<!-- Nav Item - Dashboard -->
+<li class="nav-item">
+    <a class="nav-link" href="@Url.Action("Index","Home")">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Panel</span>
+    </a>
+</li>
+<!-- Divider -->
+<hr class="sidebar-divider">
+<!-- Heading -->
+
+<li class="nav-item @Html.ActivePage("Index","Product") @Html.ActivePage("Create","Product") @Html.ActivePage("Details","Product") @Html.ActivePage("Edit","Product") @Html.ActivePage("EditImage","Product")">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="true" aria-controls="collapseProducts">
+        <i class="fas fa-cubes"></i>
+        <span>Ürünler</span>
+    </a>
+    <div id="collapseProducts" class="collapse @Html.ActivePageShow("Index","Product") @Html.ActivePageShow("Create","Product") @Html.ActivePageShow("Details","Product") @Html.ActivePageShow("Edit","Product") @Html.ActivePageShow("EditImage","Product")" aria-labelledby="headingProducts" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item @Html.ActivePage("Index","Product")" href="@Url.Action("Index","Product")">Listele</a>
+            <a class="collapse-item @Html.ActivePage("Create","Product")" href="@Url.Action("Create","Product")">Ekle</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item @Html.ActivePage("Index","Category") @Html.ActivePage("Create","Category") @Html.ActivePage("Details","Category") @Html.ActivePage("Edit","Category") @Html.ActivePage("Delete","Category")">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories" aria-expanded="true" aria-controls="collapseCategories">
+        <i class="fas fa-th-list"></i>
+        <span>Kategoriler</span>
+    </a>
+    <div id="collapseCategories" class="collapse @Html.ActivePageShow("Index","Category") @Html.ActivePageShow("Create","Category") @Html.ActivePageShow("Details","Category") @Html.ActivePageShow("Edit","Category") @Html.ActivePageShow("Delete","Category")" aria-labelledby="headingCategories" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item @Html.ActivePage("Index","Category")" href="@Url.Action("Index","Category")">Listele</a>
+            <a class="collapse-item @Html.ActivePage("Create","Category")" href="@Url.Action("Create","Category")">Ekle</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item @Html.ActivePage("Index","Order")  @Html.ActivePage("Details","Order")">
+    <a class="nav-link" href="@Url.Action("Index","Order")">
+        <i class="fas fa-dolly"></i>
+        <span>Siparişler</span>
+    </a>
+</li>
+
+<li class="nav-item @Html.ActivePage("Index","User")  @Html.ActivePage("Details","User")">
+    <a class="nav-link" href="@Url.Action("Index","User")">
+        <i class="fas fa-users"></i>
+        <span>Kullanıcılar</span>
+    </a>
+</li>
+
+
+<li class="nav-item @Html.ActivePage("Index","Contact")  @Html.ActivePage("Details","Contact")">
+    <a class="nav-link" href="@Url.Action("Index","Contact")">
+        <i class="fas fa-envelope"></i>
+        <span>Mesajlar</span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Çıkış</span>
+    </a>
+</li>
+

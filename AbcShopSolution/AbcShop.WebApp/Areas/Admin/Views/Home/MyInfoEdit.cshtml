@@ -1,0 +1,46 @@
+﻿@using AbcShop.WebApp.Areas.Admin.ViewModels.Home
+@model MyInfoEditViewModel
+
+
+@{
+    ViewBag.Title = "MyInfoEdit";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">         
+                
+                <div class="form-group row mr-2">
+                    @Html.LabelFor(x => x.Name, new { @class = "text-danger col-md-2" })
+                    @Html.TextBoxFor(x => x.Name, new { @class = "col-md-10 form-control" })
+                    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group row mr-2">
+                    @Html.LabelFor(x => x.Surname, new { @class = "text-danger col-md-2" })
+                    @Html.TextBoxFor(x => x.Surname, new { @class = "col-md-10 form-control" })
+                    @Html.ValidationMessageFor(x => x.Surname, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group row mr-2">
+                    @Html.LabelFor(x => x.Email, new { @class = "text-danger col-md-2" })
+                    @Html.TextBoxFor(x => x.Email, new { @class = "col-md-10 form-control" })
+                    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group row mr-2">
+                    @Html.LabelFor(x => x.CityId, new { @class = "text-danger col-md-2" })
+                    @Html.DropDownListFor(x => x.CityId, (SelectList)ViewBag.CityId, new { @class = "form-control col-md-4" })
+                    @Html.ValidationMessageFor(x => x.CityId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="row float-right mr-2">
+                    <a href="@Url.Action("MyInfo","Home")" class="btn btn-secondary mr-3">Vazgeç</a>
+                    <button type="submit" class="btn btn-success">Kaydet</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

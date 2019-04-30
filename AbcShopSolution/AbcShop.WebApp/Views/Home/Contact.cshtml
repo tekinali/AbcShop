@@ -1,0 +1,78 @@
+﻿@using AbcShop.Entities
+@model ContactMessage
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+
+<br />
+@if (ViewBag.Result != null && ViewBag.Result == true)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>İşlem Başarılı!</strong> Mesajınz gönderildi.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (ViewBag.Result != null && ViewBag.Result == false)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>İşlem Başarısız!</strong> Mesajınz gönderilmedi.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>İletişim Formu</h2>
+            <hr />
+        </div>
+    </div>
+<div class="row">
+    <div class="col-md-8">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Adınız..." })
+            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+            <br />
+            @Html.TextBoxFor(x => x.Surname, new { @class = "form-control", placeholder = "Soyadınız..." })
+            @Html.ValidationMessageFor(x => x.Surname, "", new { @class = "text-danger" })
+            <br />
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Eposta Adresiniz...", @type = "email" })
+            @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+            <br />
+            @Html.TextBoxFor(x => x.Subject, new { @class = "form-control", placeholder = "Konu..." })
+            @Html.ValidationMessageFor(x => x.Subject, "", new { @class = "text-danger" })
+            <br />
+            @Html.TextAreaFor(x => x.Text, new { @class = "form-control", placeholder = "Mesajınız...", @rows = "5" })
+            @Html.ValidationMessageFor(x => x.Text, "", new { @class = "text-danger" })
+            <br />
+            <button class="btn btn-success float-right"><span class="fas fa-paper-plane"></span> Gönder</button>
+        }
+
+
+    </div>
+    <div class="col-md-4">
+        <b>Customer service:</b> <br />
+        Phone: +1 129 209 291<br />
+        E-mail: <a href="#">support@abcshop.com</a><br />
+        <br /><br />
+        <b>Headquarter:</b><br />
+        AbvcShop Inc, <br />
+        Las vegas street 201<br />
+        55001 Nevada, USA<br />
+        Phone: +1 145 000 101<br />
+        <a href="#">usa@abcshop.com</a><br />
+
+    </div>
+</div>
+

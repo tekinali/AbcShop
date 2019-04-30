@@ -1,0 +1,62 @@
+﻿@using AbcShop.Entities
+@model List<Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Ürün Listesi</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dtCategories" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Kategori Adı</th>   
+                                <th>Ürün Sayısı</th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Products.Count</td>                               
+                                    <td class="text-center">
+                                        <a href="@Url.Action("Details","Category",new { id = @item.Id })" class="btn btn-primary btn-sm">Detay</a>
+                                    </td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section dataTable
+{
+    <script>
+        $(document).ready(function () {
+            $('#dtCategories').DataTable({
+                "language":
+                {
+                    "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Turkish.json"
+                }
+            });
+        });
+
+    </script>
+}

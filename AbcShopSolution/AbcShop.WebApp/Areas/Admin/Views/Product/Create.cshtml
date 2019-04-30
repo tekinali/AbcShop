@@ -1,0 +1,195 @@
+﻿@using AbcShop.Entities
+@model Product
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("Create", "Product",FormMethod.Post,new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Ürün Bilgileri</h6>
+                </div>
+
+                <div class="card-body">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Name)
+                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.ProductCode)
+                                @Html.TextBoxFor(x => x.ProductCode, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ProductCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><i class="fas fa-lira-sign"></i> Fiyat</label>
+                                @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.ProductCode, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Stok Adedi</label><br />
+                                @Html.TextBoxFor(x => x.Stock, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Stock, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Kategori</label>
+                                @Html.DropDownListFor(x => x.CategoryId, (SelectList)ViewBag.CategoryId, "Kategori Seçiniz", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.CategoryId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Title)
+                                @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Onay Durumu:</label> &nbsp;
+                                @Html.EditorFor(x => x.IsHome, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.IsHome, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Anasayfada Görüntüleme:</label> &nbsp;
+                                @Html.EditorFor(x => x.IsApproved, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.IsApproved, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="ml-2">Ürün Ana Resim</label>
+                            @*<div class="input-group ml-1">
+                                <div class="custom-file ">
+                                    <input type="file" class="custom-file-input" name="MainImage" id="MainImage" aria-describedby="inputGroupFile">
+                                    <label class="custom-file-label" for="inputGroupFile">Resim Seç</label>
+                                </div>
+                            </div>*@
+
+                            <input type="file" name="MainImage" id="MainImage" class="form-control" style="height:44px;" /><br />                                        
+                            <span class="ml-2"><i>Lütfen jpg, jpeg ya da png formatı kullanın. Max 2 MB boyutunda dosya seçiniz.</i></span>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-secondary">Ürün Açıklama</h6>
+                </div>
+                <div class="card-body">
+
+                    @Html.TextAreaFor(model => model.Description, new { @id = "Description", @name = "Description" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-danger">Ürün Özellikleri</h6>
+                </div>
+                <div class="card-body">
+
+                    @Html.TextAreaFor(model => model.Features, new { @id = "Features", @name = "Features" })
+                    @Html.ValidationMessageFor(model => model.Features, "", new { @class = "text-danger" })
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+
+                    <button type="submit" class="btn btn-success btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Kaydet</span>
+                    </button> &nbsp;
+                    <a href="@Url.Action("Index","Category")" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                        <span class="text">Vazgeç</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+
+
+@section createObj
+{
+}
+
+@section CkEditor
+{
+    <script>
+        CKEDITOR.replace('Description');
+        CKEDITOR.replace('Features');
+    </script>
+
+
+}

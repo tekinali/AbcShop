@@ -1,0 +1,96 @@
+﻿@using  AbcShop.WebApp.Models.Notification
+@model OkViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbcShop</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container">
+        <!-- Outer Row -->
+
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="text-success"><span class="fas fa-check"></span> @Model.Title</h1>
+                                    </div>
+                                    <hr>
+
+                                    @foreach (string msg in Model.Items)
+                                    {
+                                        <p>@msg</p>
+                                    }
+                                    <hr />
+                                    <div class="text-center">
+                                        <p><span class="count"></span> Otomatik yönlendirme gerçekleşmiyorsa <i><a href="@Model.RedirectingUrl">buraya</a></i> tıklayın</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+
+
+    @{
+        string js = string.Empty;
+        if (Model.IsRedirecting)
+        {
+            js = "setTimeout(function () { window.location = '" + Model.RedirectingUrl + "';}, " +
+                Model.RedirectingTimeOut + ");";
+        }
+    }
+
+    <script>
+        $(function () {
+            @Html.Raw(js);
+
+        });
+
+        $(function () {
+
+            var saniye = (@Model.RedirectingTimeOut)/1000;
+            var sayacYeri = $(".count");
+
+            $.sayimiBaslat = function () {
+                if (saniye > 1) {
+                    saniye--;
+                    sayacYeri.text(saniye);
+                }
+            }
+
+            sayacYeri.text(saniye);
+            setInterval("$.sayimiBaslat()", 1000);
+
+        });
+
+    </script>
+</body>
+</html>

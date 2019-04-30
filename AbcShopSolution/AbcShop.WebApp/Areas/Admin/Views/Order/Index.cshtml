@@ -1,0 +1,71 @@
+﻿@using AbcShop.Entities
+@model List<Order>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Siparişler</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dtOrders" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Sipariş Numarası</th>
+                                <th>Tutar</th>
+                                <th>Kullanıcı</th>
+                                <th>Tarih</th>
+                                <th>Durum</th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.OrderNumber</td>
+                                    <td>@item.Total.ToString("c")</td>
+                                    <td>@item.ApplicationUser.UserName</td>
+                                    <td>@item.OrderDate</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-@item.OrderState.Color">@item.OrderState.State</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="@Url.Action("Details","Order",new { id = @item.Id })" class="btn btn-primary btn-sm">Detay</a>
+                                    </td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section dataTable
+{
+    <script>
+        $(document).ready(function () {
+            $('#dtOrders').DataTable({
+                "language":
+                {
+                    "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Turkish.json"
+                }
+            });
+        });
+
+    </script>
+}

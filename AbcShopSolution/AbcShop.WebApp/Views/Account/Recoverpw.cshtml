@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Recoverpw";
+}
+
+<!-- content begin -->
+<div class="row my-4">
+    <div class="col-md-6 offset-md-3">
+
+        @using (Html.BeginForm("Recoverpw", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div class="card card-default shadow">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>
+                                <span class="fas fa-key fa-2x"></span>
+                            </h3>
+                        </div>
+                        <div class="col-md-9 text-right">
+                            <h2>Şifremi Unuttum</h2>                     
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">E-Posta Adresiniz:</label>
+                        <input type="text" class="form-control" name="email" id="email">
+                    </div>
+
+                </div>
+                <div class="card-footer text-muted text-right">
+
+                    <button class="btn btn-success" type="submit">
+                        <span class="fas fa-sign-in-alt mr-2"></span>Gönder
+                    </button>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

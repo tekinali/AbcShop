@@ -1,0 +1,38 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using AbcShop.WebApp.Models
+@model IPagedList<ProductModel>
+
+@{
+    ViewBag.Title = "ProductList";
+}
+<div class="row">
+    <div class="col-md-3">
+        @Html.Action("GetCategories", "Home")
+    </div>
+
+    <div class="col-md-9">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+            <div class="col-md-4 mb-5">
+                @Html.Partial("_ProductItem", item)
+            </div>
+            }
+        </div>
+
+        <!-- Pagination -->
+        <div class="col-md-10 offset-md-2">
+            @if (ViewBag.CategoryId != null)
+            {
+                @Html.PagedListPager(Model, Page => Url.Action("ProductList", new { Page, @id = (int)ViewBag.CategoryId }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+            }
+            else
+            {
+                @Html.PagedListPager(Model, Page => Url.Action("ProductList", new { Page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+            }
+        </div>
+    </div>
+
+
+</div>

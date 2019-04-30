@@ -1,0 +1,122 @@
+﻿@using AbcShop.WebApp.ViewModels.Cart
+@model CheckoutViewModel
+
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+
+<!-- content begin -->
+<div class="row">
+    <div class="col-md-12">
+        <h2>Ödeme Sayfası</h2>
+        <hr>
+    </div>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row my-2">
+        <div class="col-md-2 text-center">
+            <h2>
+                <span class="fa fa-credit-card fa-4x  text-secondary"></span>
+            </h2>
+        </div>
+        <div class="col-md-10">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label text-danger">Adres</label>
+                @if (ViewBag.NullAddress != null && ViewBag.NullAddress == true)
+                {
+                    <div class="col-md-10">
+                        <div class="alert alert-danger">İşleme devam etmek için lütfen adres oluşturunuz.</div>
+                        <a href="" class="btn btn-success btn-sm">Adres Ekle</a>
+                    </div>
+
+                }
+                else
+                {
+                    @Html.DropDownListFor(x => x.AddressId, (SelectList)ViewBag.AddressId, "Adres seçiniz", new { @class = "form-control col-md-4" })
+                    @Html.ValidationMessageFor(x => x.AddressId, "", new { @class = "text-danger" })
+                }
+
+
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label text-danger">Tutar</label>
+                <label class="col-md-10 col-form-label ">@Model.Total.ToString("c")</label>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <hr>
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <label class="col-md-2 col-form-label text-danger">Ad &amp; Soyad </label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.ccName, new { @class = "form-control", placeholder = "Kart Sahibinin Adı Soyadı" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label text-danger">Kart Numarası </label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.ccNumber, new { @class = "form-control", placeholder = "0000 0000 0000 0000" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label text-danger">CVC </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(x => x.ccCvc, new { @class = "form-control", placeholder = "000" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 text-danger">Son Kul. </label>
+                <div class="col-md-2">
+                    <select class="form-control mr-4">
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control">
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-12 text-right">
+            @if (ViewBag.NullAddress != null && ViewBag.NullAddress == true)
+            {
+                <a href="" class="btn btn-success disabled">
+                    <span class="fa fa-credit-card mr-2"></span> Öde
+                </a>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-success">
+                    <span class="fa fa-credit-card mr-2"></span> Öde
+                </button>
+            }
+
+        </div>
+    </div>
+
+}
+

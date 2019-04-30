@@ -1,0 +1,98 @@
+﻿@using AbcShop.Entities.ValueObjects
+@model RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<!-- content begin -->
+<div class="row my-4">
+    <div class="col-md-8 offset-md-2 my-4">
+
+        @using (Html.BeginForm())
+        {
+            <div class="card card-default shadow">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>
+                                <span class="fa fa-user-plus fa-2x"></span>
+                            </h3>
+                        </div>
+                        <div class="col-md-9 text-right">
+                            <h2>Kayıt Formu</h2>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(x => x.Name)
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(x => x.Surname)
+                            @Html.TextBoxFor(x => x.Surname, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Surname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(x => x.Email)
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(x => x.ReEmail)
+                            @Html.TextBoxFor(x => x.ReEmail, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.ReEmail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(x => x.Username)
+                            @Html.TextBoxFor(x => x.Username, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Username, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(x => x.CityId)
+                            @Html.DropDownListFor(x => x.CityId, (SelectList)ViewBag.CityId, "Şehir", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.CityId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(x => x.Password)
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(x => x.RePassword)
+                            @Html.PasswordFor(x => x.RePassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.RePassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer text-muted text-right">
+                    <a href="@Url.Action("Login","Account")" class="btn font-italic">
+                        Hesabım var. Giriş yap
+                    </a>
+                    <button class="btn btn-success" type="submit">
+                        <span class="fas fa-save mr-2"></span>Kayıt
+                    </button>
+                </div>
+            </div>
+
+        }
+      
+    </div>
+</div>
+<!-- content end -->

@@ -1,0 +1,65 @@
+﻿@using AbcShop.Entities
+@model List<ContactMessage>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <table class="table table-bordered table-hover" id="dtContact" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <td width="10%;">Eposta</td>
+                            <td width="75%;">Konu</td>
+                            <td width="10%;">Tarih</td>
+                            <td width="5%;"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (!item.IsRead)
+                            {
+                                <tr class="font-weight-bold">
+                                    <td>@item.Email</td>
+                                    <td>@item.Subject</td>
+                                    <td>@item.DateTime</td>
+                                    <td><a href="@Url.Action("Details","Contact",new {@id=item.Id })" class="btn btn-secondary btn-sm btn-circle" title="Oku"><i class="fas fa-angle-right"></i></a></td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>@item.Email</td>
+                                    <td>@item.Subject</td>
+                                    <td>@item.DateTime</td>
+                                    <td><a href="@Url.Action("Details","Contact",new {@id=item.Id })" class="btn btn-secondary btn-sm btn-circle" title="Oku"><i class="fas fa-angle-right"></i></a></td>
+                                </tr>
+                            }
+
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section dataTable
+{
+    <script>$(document).ready(function () {
+
+            $('#dtContact').DataTable({
+                "language":
+                {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Turkish.json"
+                }
+            });
+
+        });</script>
+}

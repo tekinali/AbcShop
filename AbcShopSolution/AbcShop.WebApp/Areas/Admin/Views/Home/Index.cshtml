@@ -1,0 +1,144 @@
+﻿@using AbcShop.WebApp.Areas.Admin.ViewModels.Home
+@model IndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Content Row -->
+<div class="row">
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-sm font-weight-bold text-primary text-uppercase mb-1">Ürünler</div>
+                        <div class="h4 mb-0 font-weight-bold text-gray-800">@Model.ProductCount</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-fw fa-cubes fa-3x text-gray-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-sm font-weight-bold text-success text-uppercase mb-1">Sipariş Sayısı</div>
+                        <div class="h4 mb-0 font-weight-bold text-gray-800">@Model.OrderCount</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-fw fa-dolly fa-3x text-gray-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-sm font-weight-bold text-info text-uppercase mb-1">Toplam Tutar</div>
+                        <div class="h4 mb-0 font-weight-bold text-gray-800">@Model.OrderTotal.ToString("c")</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-book-open fa-3x text-gray-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-sm font-weight-bold text-warning text-uppercase mb-1">Kullanıcı</div>
+                        <div class="h4 mb-0 font-weight-bold text-gray-800">@Model.UserCount</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-fw fa-users fa-3x text-gray-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <div class="col-md-12">
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Son 5 Sipariş</h6>
+            </div>
+            <div class="card-body">
+                @if (Model.Orders.Count() == 0)
+                {
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        Sistemde kayıtlı sipariş bulunmamaktadır.
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dtOrders" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Sipariş Numarası</th>
+                                    <th>Tutar</th>
+                                    <th>Kullanıcı</th>
+                                    <th>Tarih</th>
+                                    <th>Durum</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Orders)
+                                {
+                                    <tr>
+                                        <td>@item.OrderNumber</td>
+                                        <td>@item.Total.ToString("c")</td>
+                                        <td>@item.ApplicationUser.UserName</td>
+                                        <td>@item.OrderDate</td>
+                                        <td class="text-center">
+                                            <span class="badge badge-@item.OrderState.Color">@item.OrderState.State</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="@Url.Action("Details","Order",new { id = @item.Id })" class="btn btn-primary btn-sm">Detay</a>
+                                        </td>
+                                    </tr>
+                                }
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

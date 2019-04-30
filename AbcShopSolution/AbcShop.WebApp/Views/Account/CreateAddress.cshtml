@@ -1,0 +1,61 @@
+﻿@using AbcShop.WebApp.ViewModels.Account
+@model CreateAddressViewModel
+
+@{
+    ViewBag.Title = "CreateAddress";
+}
+
+<!-- content begin -->
+<div class="row">
+    <div class="col-md-12">
+        <h2>Yeni Adres</h2>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("CreateAddress", "Account", FormMethod.Post))
+        {
+
+
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = $"{Html.DisplayNameFor(x => x.Title)}" })
+                @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.TextAreaFor(x => x.AddressLine, new { @class = "form-control", @rows = "3", @placeholder = $"{Html.DisplayNameFor(x => x.AddressLine)}" })
+                @Html.ValidationMessageFor(x => x.AddressLine, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.PostCode, new { @class = "form-control", @placeholder = $"{Html.DisplayNameFor(x => x.PostCode)}" })
+                @Html.ValidationMessageFor(x => x.PostCode, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.MobilePhone, new { @class = "form-control", @placeholder = $"{Html.DisplayNameFor(x => x.MobilePhone)}" })
+                @Html.ValidationMessageFor(x => x.MobilePhone, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.DropDownListFor(x => x.CityId, (SelectList)ViewBag.CityId, "Şehir", new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.CityId, "", new { @class = "text-danger" })
+            </div>
+
+
+
+            <a href="@Url.Action("UserAddress","Account")" class="btn btn-secondary">
+                <span class="fa fa-close mr-2"></span>Vazgeç
+            </a>
+            <button type="submit" class="btn btn-success">
+                <span class="fa fa-save mr-2"></span>Kaydet
+            </button>
+
+        }
+    </div>
+</div>

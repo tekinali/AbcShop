@@ -1,0 +1,50 @@
+﻿@using AbcShop.Entities
+@model ContactMessage
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="from-group col-md-4">
+                        <label for="Email">Eposta</label>
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "Email", @readonly = "" })
+                    </div>
+                    <div class="from-group col-md-4">
+                        <label for="Email">Ad-Soyad</label>
+                        <input type="text" class="form-control" readonly value="@(Model.Name+" "+Model.Surname)" />
+                    </div>
+                    <div class="from-group col-md-4">
+                        <label for="Date">Tarih</label>
+                        <input type="text" class="form-control" readonly value="@(Model.DateTime.ToString("dd MMMM yyyy dddd HH:mm"))" />
+                    </div>
+                </div>
+                <br />
+                <div class="form-row">
+                    <div class="from-group col-md-12">
+                        <label for="Subject">Konu</label>
+                        @Html.TextAreaFor(model => model.Subject, new { @class = "form-control", @id = "Subject", @readonly = "", @rows = "2" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-row">
+                    <div class="from-group col-md-12">
+                        <label for="Subject">İçerik</label>
+                        @Html.TextAreaFor(model => model.Text, new { @class = "form-control", @id = "Subject", @readonly = "", @rows = "5" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-row">
+                    <div class="from-group offset-9 col-md-3 text-right">
+                        <a href="@Url.Action("Delete","Contact",new {@id=Model.Id })" class="btn btn-danger">Sil</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

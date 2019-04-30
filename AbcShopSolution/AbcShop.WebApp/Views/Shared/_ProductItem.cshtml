@@ -1,0 +1,25 @@
+﻿@using AbcShop.WebApp.Models
+@model ProductModel
+
+
+<div class="card">
+    <div class="imgdiv">
+        <img class="card-img-top p-3" style="max-height:200px;" src="~/Upload/Images/Product/@Model.MainImage">
+    </div>
+
+    <div class="card-body">
+        <h4 class="card-title text-center">
+            <a class="text-decoration-none" href="@Url.Action("ProductDetails","Home",new { @id=Model.Id })">@Model.Name</a>
+        </h4><br />
+        <p class="card-text text-justify" style="height:40px;">        
+            @Model.Title
+        </p>
+
+        <hr />
+
+        <span class="font-weight-bold"><i class="fas fa-lira-sign"></i> @Model.Price</span>
+        <a href="@Url.Action("AddToCart","Cart",new { @id=Model.Id })" class="btn btn-success btn-sm float-right">
+            <span class="fa fa-shopping-cart mr-2"></span>Sepete Ekle
+        </a>
+    </div>
+</div>

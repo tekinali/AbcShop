@@ -1,0 +1,120 @@
+﻿@using AbcShop.Entities
+@model Order
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Sipariş Bilgisi</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @using (Html.BeginForm("UpdateOrderState", "Order", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(x=>x.Id)
+
+                                @Html.LabelFor(x => x.OrderStateId)
+                                <div class="row ml-1">
+                                    @Html.DropDownListFor(model => model.OrderStateId, (SelectList)ViewBag.StateId, new { @class = "form-control col-md-6" })
+                                    <button type="submit" class="btn btn-success btn-sm ml-3">Güncelle</button>
+                                </div>
+                            }
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.OrderNumber)
+                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control", @readonly = "" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.OrderDate)
+                            @Html.TextBoxFor(x => x.OrderDate, new { @class = "form-control", @readonly = "" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Total)
+                            <input type="text" class="form-control" readonly value="@Model.Total.ToString("c")" />
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.ApplicationUser.UserName)
+                            @Html.TextBoxFor(x => x.ApplicationUser.UserName, new { @class = "form-control", @readonly = "" })
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.CityId)
+                            @Html.TextBoxFor(x => x.City.Name, new { @class = "form-control", @readonly = "" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.AddressLine)
+                            @Html.TextBoxFor(x => x.AddressLine, new { @class = "form-control", @readonly = "" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.PostCode)
+                            @Html.TextBoxFor(x => x.PostCode, new { @class = "form-control", @readonly = "" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.MobilePhone)
+                            @Html.TextBoxFor(x => x.MobilePhone, new { @class = "form-control", @readonly = "" })
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+                <br />
+                <div class="row">                   
+                    <div class="table-responsive">
+                         <h5 class="ml-2 font-weight-bold">Ürünler</h5>
+                        <table class="table table-bordered">
+                            
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Ürün</th>
+                                    <th>Adet</th>
+                                    <th>Birim Fiyat</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderLines)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img style="height:50px;" src="~/Upload/Images/Product/@item.Product.MainImage" />
+                                        </td>
+                                        <td>@item.Product.Name</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.Price.ToString("c")</td>
+                                        <td>
+                                            <a href="@Url.Action("Details","Product",new {@id=item.ProductId })" target="_blank" class="btn btn-info btn-sm">İncele</a>
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+           
+            </div>
+
+        </div>
+    </div>
+</div>

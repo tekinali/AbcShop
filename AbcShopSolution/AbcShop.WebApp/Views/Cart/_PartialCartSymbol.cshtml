@@ -1,0 +1,7 @@
+﻿@using AbcShop.WebApp.Models
+@model Cart
+
+<a class="nav-link" href="@Url.Action("Index","Cart")">
+    <span class="fas fa-shopping-cart mr-2"></span>Sepetim
+    <span class="badge badge-secondary badge-pill">@Model.CartLines.Count</span>
+</a>

@@ -1,0 +1,98 @@
+﻿@using AbcShop.WebApp.Areas.Admin.ViewModels.Home
+@model MyInfoViewModel
+
+
+@{
+    ViewBag.Title = "MyInfo";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                @if (TempData["passwordRes"] != null)
+                {
+                    if ((bool)TempData["passwordRes"] == true)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                            Şifreniz başarılı bir şekilde değiştirildi. Bir sonraki giriş işlelerinizde yeni şifrenizi kullanabilirsiniz.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                            Şifre değişikliği gerçekleştirilemedi. Lütfen girmiş olduğunuz ifadeleri kontrol ediniz.
+                        </div>
+                    }
+                }
+
+                <div class="form-group row mr-2">
+                    @Html.LabelFor(x => x.Username, new { @class = "text-danger col-md-2" })
+                    @Html.TextBoxFor(x => x.Username, new { @class = "col-md-10 form-control", @readonly = "" })
+                </div>
+
+                <div class="form-group row mr-2">
+                    @Html.LabelFor(x => x.Name, new { @class = "text-danger col-md-2" })
+                    @Html.TextBoxFor(x => x.Name, new { @class = "col-md-10 form-control", @readonly = "" })
+
+                </div>
+                <div class="form-group row mr-2">
+                    @Html.LabelFor(x => x.Surname, new { @class = "text-danger col-md-2" })
+                    @Html.TextBoxFor(x => x.Surname, new { @class = "col-md-10 form-control", @readonly = "" })
+                </div>
+                <div class="form-group row mr-2">
+                    @Html.LabelFor(x => x.Email, new { @class = "text-danger col-md-2" })
+                    @Html.TextBoxFor(x => x.Email, new { @class = "col-md-10 form-control", @readonly = "" })
+                </div>
+                <div class="form-group row mr-2">
+                    @Html.LabelFor(x => x.City, new { @class = "text-danger col-md-2" })
+                    @Html.TextBoxFor(x => x.City, new { @class = "col-md-10 form-control", @readonly = "" })
+                </div>
+
+                <div class="row float-right mr-2">
+                    <a href="@Url.Action("MyInfoEdit","Home")" class="btn btn-info mr-3">
+                        <span class="fa fa-edit mr-2"></span>Düzenle
+                    </a>
+                    <button type="button" class="btn btn-secondary " data-toggle="modal" data-target="#ModalPassword">
+                        <i class="fas fa-key mr-2"></i>Şifremi Değiştir
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (Html.BeginForm("ChangePassword", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <!-- Modal -->
+    <div class="modal fade" id="ModalPassword" tabindex="-1" role="dialog" aria-labelledby="ModalPasswordTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalPasswordTitle">Şifre Değiştir</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Yeni Şifreniz:</label>
+                        <input type="password" class="form-control" name="newPassword" id="newPassword" minlength="6" maxlength="16">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                    <button type="submit" class="btn btn-primary">Değiştir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

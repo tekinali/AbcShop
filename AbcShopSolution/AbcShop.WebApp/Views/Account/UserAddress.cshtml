@@ -1,0 +1,55 @@
+﻿@using AbcShop.Entities
+@model List<Address>
+
+@{
+    ViewBag.Title = "UserAddress";
+}
+
+<!-- content begin -->
+<div class="row">
+    <div class="col-md-12">
+        <h2>Adreslerim</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover text-center table-sm">
+            <thead>
+                <tr>
+                    <th>Başlık</th>
+                    <th>İl</th>
+                    <th>Adres</th>
+                    <th>Posta Kodu</th>
+                    <th>Telefon</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.City.Name</td>
+                        <td>@item.AddressLine</td>
+                        <td>@item.PostCode</td>
+                        <td>@item.MobilePhone</td>
+                        <td>
+                            <a href="@Url.Action("DeleteAddress","Account",new {@id=item.Id })" class="btn btn-danger btn-sm">
+                                <span class="fa fa-trash"></span>
+                            </a>
+                        </td>
+                    </tr>            
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-md-12 text-right">
+        <a href="@Url.Action("CreateAddress","Account")" class="btn btn-success">
+            <span class="fa fa-plus mr-2"></span>Yeni Adres
+        </a>
+    </div>
+</div>
+<!-- content end -->
+

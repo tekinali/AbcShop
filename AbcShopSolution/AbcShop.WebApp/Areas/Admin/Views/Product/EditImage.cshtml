@@ -1,0 +1,68 @@
+﻿@using AbcShop.Entities
+@model Product
+
+@{
+    ViewBag.Title = "EditImage";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Ürün Resimleri</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        @using (Html.BeginForm("UploadImage", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(x => x.Id)
+
+                            <div class="row">
+                                <input type="file" name="Image" id="Image" class="form-control col-8 ml-3" style="height:44px;" />
+                                <button type="submit" class="btn btn-primary btn-icon-split ml-2">
+                                    <span class="text">Resim Yükle</span>
+                                </button>
+                            </div>
+                            <span class="ml-2"><i>Lütfen jpg, jpeg ya da png formatı kullanın. Max 2 MB boyutunda dosya seçiniz.</i></span>
+
+                        }
+                    </div>
+                </div>
+
+                <br /><br />
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover text-center" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td><img style="max-width:300px;" src="~/Upload/Images/Product/@Model.MainImage" /></td>
+                                <td>Ürün Ana Resim</td>
+                                <td><a href="@Url.Action("RemoveMainImage","Product",new {id=Model.Id })" class="btn btn-danger btn-sm">Sil</a></td>
+                            </tr>
+
+                            @foreach (var item in Model.ProductImages)
+                            {
+                                <tr>
+                                    <td><img style="max-width:300px;" src="~/Upload/Images/Product/@item.FileName" /></td>
+                                    <td>Resim</td>
+                                    <td>
+                                        <a href="@Url.Action("MakeMainImage","Product",new { id=item.Id})" class="btn btn-primary btn-sm">Ana Resim Yap</a> &nbsp;
+                                        <a href="@Url.Action("RemoveImage","Product",new { id=item.Id})" class="btn btn-danger btn-sm">Sil</a>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

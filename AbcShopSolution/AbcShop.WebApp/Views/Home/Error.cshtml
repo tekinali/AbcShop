@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+}
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbcShop</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container">
+        <!-- Outer Row -->
+
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="text-danger"><span class="fas fa-times"></span> Hata!</h1>
+                                    </div>
+                                    <hr>
+
+                                    @{
+                                        Exception ex = null;
+
+                                        if (TempData["LastError"] != null)
+                                        {
+                                            ex = TempData["LastError"] as Exception;
+                                        }
+                                    }
+
+                                    <p>
+                                        Hata oluştu, lütfen site yöneticisi ile iletişime geçiniz.
+                                        <br /><br /><br />
+                                        @if (ex != null)
+                                        {
+                                            <strong>Hata Detay : </strong>
+                                            @ex.Message
+                                            <br /><br /><br />
+                                        }
+
+                                        <button type="button" id="btnBack" class="btn btn-success waves-effect waves-light" href="@Request.UrlReferrer"> Geri Dön</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+
+    <script>
+        var resizefunc = [];
+
+        var btn = document.getElementById("btnBack");
+        btn.onclick = function () {
+            window.history.back();
+        }
+    </script>
+
+
+</body>
+</html>

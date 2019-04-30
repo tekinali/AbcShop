@@ -1,0 +1,54 @@
+﻿@using AbcShop.WebApp.ViewModels.Account
+@model UserProfileEditViewModel
+
+
+@{
+    ViewBag.Title = "UserProfileEdit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Bilgilerim</h2>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <img src="~/Upload/Images/userimage.jpg" class="rounded-circle img-fluid img-thumbnail">
+        </div>
+        <div class="col-md-8">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(x => x.Name, new { @class = "text-danger col-md-2" })
+                @Html.TextBoxFor(x => x.Name, new { @class = "col-md-10 form-control" })
+                @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(x => x.Surname, new { @class = "text-danger col-md-2" })
+                @Html.TextBoxFor(x => x.Surname, new { @class = "col-md-10 form-control" })
+                @Html.ValidationMessageFor(x => x.Surname, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(x => x.Email, new { @class = "text-danger col-md-2" })
+                @Html.TextBoxFor(x => x.Email, new { @class = "col-md-10 form-control" })
+                @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(x => x.CityId, new { @class = "text-danger col-md-2" })
+                @Html.DropDownListFor(x => x.CityId, (SelectList)ViewBag.CityId, new { @class = "form-control col-md-4" })
+                @Html.ValidationMessageFor(x => x.CityId, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <a href="@Url.Action("UserProfile","Account")" class="btn btn-secondary mr-3">Vazgeç</a>
+            <button type="submit" class="btn btn-success">Kaydet</button>
+        </div>
+    </div>
+}
